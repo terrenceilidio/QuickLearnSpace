@@ -170,7 +170,7 @@ module.exports = env => {
         },
         module: {
             rules: [{
-                include: [join(appFullPath, entryPath + ".js"), join(appFullPath, entryPath + ".ts")],
+                test: nsWebpack.getEntryPathRegExp(appFullPath, entryPath + ".(js|ts)"),
                 use: [
                     // Require all Android app components
                     platform === "android" && {
