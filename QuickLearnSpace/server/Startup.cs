@@ -30,12 +30,6 @@ namespace LearnQuickOnline
         {
             var config = new ServerConfig();
             Configuration.Bind(config);
-            var todoContext = new LearnQuickOnlineContext(config.MongoDB);
-            try{
-                var tt = todoContext.users.Find(_ => true).ToList();
-            }catch(Exception ex){
-                
-            }
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

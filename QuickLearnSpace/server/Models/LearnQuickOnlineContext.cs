@@ -8,12 +8,14 @@ namespace LearnQuickOnline.Models
     public class LearnQuickOnlineContext
     {
         private readonly IMongoDatabase _db;
-        public LearnQuickOnlineContext(MongoDBConfig config)
+        public LearnQuickOnlineContext(MongoDBConfig config = null)
         {
-            var client = new MongoClient(config.ConnectionString);
+            if(config == null){
+                config = new ServerConfig().MongoDB;
+            }
+            var client = new MongoClient(config.ConnectionStringTest);
             _db = client.GetDatabase(config.Database);
         }
-
         public IMongoCollection<User> users =>  _db.GetCollection<User>("Users");
     }
 }
