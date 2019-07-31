@@ -1,6 +1,8 @@
 import Vue from 'nativescript-vue';
 import App from './components/App.vue';
 import store from './store';
+import FirebaseConfig from './servives/firebase.config'
+
 
 import VueDevtools from 'nativescript-vue-devtools';
 
@@ -15,7 +17,8 @@ Vue.registerElement(
   'RadSideDrawer',
   () => require('nativescript-ui-sidedrawer').RadSideDrawer
 )
-
+const  firebaseC=new FirebaseConfig();
+firebaseC.init(); 
 new Vue({
 store,
   render: h => h('frame', [h(App)])
