@@ -1,15 +1,15 @@
 <template>
     <Page>
-        <ActionBar>
-            <GridLayout width="100%" columns="auto, *">
-                <Label text="MENU" @tap="$refs.drawer.nativeView.showDrawer()" col="0"/>
-                <Label class="title" text="Welcome to NativeScript-Vue!"  col="1"/>
+        <ActionBar class="bg-purple text-white">
+            <GridLayout verticalAlignent="center" width="100%" columns="auto, *">
+                <Label verticalAlignment="center" :text="'mdi-menu' | fonticon" class="mdi" :fontSize="30" @tap="$refs.drawer.nativeView.showDrawer()" col="0"/>
+                <Label verticalAlignment="center" :fontSize="18" class="title" text="Welcome to QuickLearn.Space"  col="1"/>
             </GridLayout>
         </ActionBar>
 
         <RadSideDrawer ref="drawer">
-            <StackLayout ~drawerContent backgroundColor="#ffffff">
-                <Label class="drawer-header" text="Drawer"/>
+            <StackLayout ~drawerContent class="bg-white">
+                <Label class="drawer-header bg-purple" text="Drawer"/>
 
                 <Label class="drawer-item" text="Item 1"/>
                 <Label class="drawer-item" text="Item 2"/>
@@ -17,7 +17,7 @@
             </StackLayout>
 
             <GridLayout ~mainContent columns="*" rows="*">
-                <Label class="message" :text="msg" col="0" row="0"/>
+                <Navigator defaultRoute="/login"/>
             </GridLayout>
         </RadSideDrawer>
     </Page>
@@ -34,11 +34,6 @@
 </script>
 
 <style scoped>
-    ActionBar {
-        background-color: #53ba82;
-        color: #ffffff;
-    }
-
     .title {
         text-align: left;
         padding-left: 16;
@@ -54,7 +49,6 @@
     .drawer-header {
         padding: 50 16 16 16;
         margin-bottom: 16;
-        background-color: #53ba82;
         color: #ffffff;
         font-size: 24;
     }

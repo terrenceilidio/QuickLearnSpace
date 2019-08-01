@@ -14,14 +14,22 @@
     }
   },
   "dependencies": {
+    "@nstudio/nativescript-cardview": "^1.0.0",
     "@vue/devtools": "^5.0.6",
+    "nativescript-fonticon": "^2.0.0",
+    "nativescript-gif": "^4.0.2",
+    "nativescript-material-button": "^2.3.14",
+    "nativescript-material-ripple": "^2.3.14",
+    "nativescript-material-textfield": "^2.3.14",
     "nativescript-plugin-firebase": "^9.0.4",
+    "nativescript-ripple": "^2.2.1",
     "nativescript-socketio": "^3.2.1",
     "nativescript-theme-core": "^1.0.6",
     "nativescript-toasty": "^1.3.0",
     "nativescript-ui-sidedrawer": "7.0.0",
     "nativescript-vue": "^2.0.0",
     "nativescript-vue-devtools": "^1.2.0",
+    "nativescript-vue-navigator": "0.0.3",
     "tns-core-modules": "~6.0.0",
     "vuex": "^3.0.1"
   },
