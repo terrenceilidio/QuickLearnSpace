@@ -19,10 +19,10 @@ namespace LearnQuickOnline.Controllers
         public List<User> Get()
         {
             try{
-                var tt =  context.users.CountDocuments<User>(user => true);
-                context.users.InsertOne(new User{ Username = "test_user" , Password = "niewuewib" });
+                var tt =  context.Users.CountDocuments<User>(user => true);
+                context.Users.InsertOne(new User{ Username = "test_user" , Password = "niewuewib" });
 
-                return context.users.Find<User>(user => true).ToList();
+                return context.Users.Find<User>(user => true).ToList();
             }catch(Exception ex){
                 var t = ex;
                 return null;   

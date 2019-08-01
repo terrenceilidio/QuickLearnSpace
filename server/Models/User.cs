@@ -1,5 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 
 namespace LearnQuickOnline.Models {
     public class User {
@@ -13,7 +17,7 @@ namespace LearnQuickOnline.Models {
         public string CellNumber { get; set; }
         public string[] SocialNetworks { get; set; }
         public string[] TopicsOfInterest { get; set; }
-        public bool isActive { get; set; }
+        public bool IsActive { get; set; }
         public int NumberOfFollowers { get; set; }
     }
 }

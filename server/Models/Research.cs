@@ -1,14 +1,19 @@
+using MongoDB.Driver;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace LearnQuickOnline.Models {
     public class Research {
         [BsonId]
-        public List<MongoDBRef> Topics { get; set }
+        // public List<MongoDBRef> Topics { get; set; }
         public List<MongoDBRef> Author { get; set; }
         public List<MongoDBRef> RelatedResearch { get; set; }
+
         public List<MongoDBRef> RelatedAssessment { get; set; }
-        public Datetime DateSubmitted { get; set; }
-        public Datetime LastUpdated { get; set; }
+        public DateTime DateSubmitted { get; set; }
+        public DateTime LastUpdated { get; set; }
     }
 }
