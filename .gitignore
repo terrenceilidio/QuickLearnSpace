@@ -7,3 +7,5 @@ bin/
 aspnet-core/src/QuickLearnSpace.Web.Host/App_Data/Logs/
 aspnet-core/src/QuickLearnSpace.Web.Mvc/App_Data/Logs/
 aspnet-core/src/QuickLearnSpace.Migrator/Logs/Logs.txt
+
+\.directory
