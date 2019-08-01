@@ -11,14 +11,14 @@
                     </GridLayout>
                 </CardView>
             </MDRipple>
-            <MDRipple class="m-x-10">
+            <MDRipple @tap="readTermsOfUse()" class="m-x-10">
               <Label class="m-t-10" fontSize="10%" textAlignment="center" verticalAlignment="center" text="By signing in"></Label>
               <Label class="m-b-10" fontSize="10%" :textWrap="true" textAlignment="center" verticalAlignment="center">
                 <FormattedString>
                   <Span text="you agree to our " />
-                  <Span @tap="readTermsOfUse()" text="terms of use " class="text-purple" fontStyle="italic" />
+                  <Span text="terms of use " class="text-purple" fontStyle="italic" />
                   <Span text="and " />
-                  <Span @tap="readPrivacyPolicy()" text="privacy policy " class="text-purple" fontStyle="italic" />
+                  <Span text="privacy policy " class="text-purple" fontStyle="italic" />
                 </FormattedString>
               </Label>
             </MDRipple>
@@ -58,11 +58,8 @@
       login(name){
         alert(`Handle log in via ${name}`);
       },
-      readPrivacyPolicy(){
-        alert("Read the privacy policy");
-      },
       readTermsOfUse(){
-        alert("Read the terms of use");
+        alert("Read the terms of use and privacy policy");
       }
     }
   }
