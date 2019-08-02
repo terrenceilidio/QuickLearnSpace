@@ -37,9 +37,15 @@ namespace LearnQuickOnline.Controllers
         }
 
         // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("{/login/user}:userId")]
+        public async Task Login(string username, string password)
         {
+            try {
+                var generalLogin = context.Users.FindAsync(User => User.Username == username && User.Password == password);
+                //await Task.Run(() => Login(username,password));
+            }catch (Exception ex) {
+                Console.Write(ex.Message);
+            }
         }
 
         // PUT api/values/5
