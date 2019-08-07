@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LearnQuickOnline.Helpers;
+using LearnQuickOnline.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LearnQuickOnline.Models;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 
 namespace LearnQuickOnline.Controllers
 {
@@ -12,42 +13,103 @@ namespace LearnQuickOnline.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        LearnQuickOnlineContext context = new LearnQuickOnlineContext();
+        Models.LearnQuickOnlineContext context = new Models.LearnQuickOnlineContext();
 
         // GET api/values
-        [HttpGet]
-        public List<User> Get()
+        [HttpGet("{id}")]
+        public Response<ViewUserModel> GetUser(string id)
         {
-            try{
-                var tt =  context.Users.CountDocuments<User>(user => true);
-                context.Users.InsertOne(new User{ Username = "test_user" , Password = "niewuewib" });
-
-                return context.Users.Find<User>(user => true).ToList();
-            }catch(Exception ex){
-                var t = ex;
-                return null;   
+            try
+            {
+                var _user = context.Users.Find(u => u.Id == id).FirstOrDefault();
+                if (_user != null)
+                {
+                    return new Response<ViewUserModel> {
+                        Data=ModelConverter.ConvertUserToViewModel(_user),
+                        Message ="Found the user",
+                        Status=true
+                    };
+                }
+                else
+                {
+                    throw new Exception("Can not find the user of id " + id);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<ViewUserModel>
+                {
+                    Data = null,
+                    Message = ex.Message,
+                    Status = false
+                };
             }
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpGet("all/users")]
+        public async Task<Response<List<ViewUserModel>>> GetAllUsersAsync()
         {
-            return "value";
-        }
-
-        // POST api/values
-        [HttpPost("{/login/user}:userId")]
-        public async Task Login(string username, string password)
-        {
-            try {
-                var generalLogin = context.Users.FindAsync(User => User.Username == username && User.Password == password);
-                //await Task.Run(() => Login(username,password));
-            }catch (Exception ex) {
-                Console.Write(ex.Message);
+            try
+            {
+                var _allUsers = await context.Users.Find(u => true).ToListAsync();
+                if (_allUsers != null)
+                {
+                    return new Response<List<ViewUserModel>>
+                    {
+                        Data = _allUsers.Select(v => ModelConverter.ConvertUserToViewModel(v)).ToList(),
+                        Message = "Found the user",
+                        Status = true
+                    };
+                }
+                else
+                {
+                    throw new Exception("Can not find the users");
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<ViewUserModel>>
+                {
+                    Data = null,
+                    Message = ex.Message,
+                    Status = false
+                };
             }
         }
 
+        // POST api/values
+        [HttpPost("login/user")]
+        public Response<ViewUserModel> LoginUser(Models.User user)
+        {
+            try
+            {
+                var _user = context.Users.FindAsync(u => u.Username == user.Username && u.Password == user.Password);
+                return new Response<ViewUserModel>
+                {
+                    //Data = ViewUserModel,
+                    Message = "User logged in",
+                    Status = true
+                };
+            }
+            catch (Exception ex) {
+                return new Response<ViewUserModel>
+                {
+                    //Data = _user,
+                    Message = ex.Message,
+                    Status = false
+                };
+
+            }
+
+        }
+
+        // POST api/values
+        [HttpPost("{/login/user}:Id")]
+        public async Task RegisterUser()
+        {
+
+        }
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
@@ -59,5 +121,6 @@ namespace LearnQuickOnline.Controllers
         public void Delete(int id)
         {
         }
+      
     }
 }

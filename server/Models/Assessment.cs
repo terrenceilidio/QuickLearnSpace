@@ -1,12 +1,16 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 
 namespace LearnQuickOnline.Models {
     public class Assessment {
         [BsonId]
-        public Object Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+
+        [BsonElement("Name")]
         public string Name { get; set; }
         public string Description { get; set; }
         public List<MongoDBRef> Author { get; set; }

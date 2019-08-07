@@ -1,19 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace LearnQuickOnline.Models {
-    public class User {
+namespace LearnQuickOnline.Services
+{
+    public class UserModel
+    {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         [BsonElement("Name")]
         public string Username { get; set; }
-        public string Password { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }

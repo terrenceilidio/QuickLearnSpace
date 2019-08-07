@@ -8,7 +8,10 @@ using MongoDB.Driver;
 namespace LearnQuickOnline.Models {
     public class Topic {
         [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }
+
+        [BsonElement("Name")]
         public string Name { get; set; }
         public List<string> Tags { get; set; }
         public List<MongoDBRef> RelatedTopics { get; set; }

@@ -17,9 +17,9 @@ namespace LearnQuickOnline.Models {
             var client = new MongoClient (config.ConnectionStringTest);
             _db = client.GetDatabase (config.Database);
         }
-        public IMongoCollection<User> Users => _db.GetCollection<User> ("Users");
-        public IMongoCollection<Topic> Topics => _db.GetCollection<Topic> ("Topics");
-        public IMongoCollection<Research> Research => _db.GetCollection<Research> ("Researches");
-        public IMongoCollection<Assessment> Assessment => _db.GetCollection<Assessment> ("Assessments");
+        public IMongoCollection<User> Users => _db.GetCollection<User> ("User");
+        public IMongoCollection<Topic> Topics => _db.GetCollection<Topic> ("Topic");
+        public IMongoCollection<Research> Researches => _db.GetCollection<Research> ("Research");
+        public IMongoCollection<Assessment> Assessments => _db.GetCollection<Assessment> ("Assessment");
     }
 }
