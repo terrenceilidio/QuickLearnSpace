@@ -8,7 +8,7 @@ namespace LearnQuickOnline.Helpers
 {
     public static class ModelConverter
     {
-        public static Models.User ConvertUserToDatabaseFormat(UserModel user)
+        public static Models.User ConvertUserToDatabaseFormat(ViewUserModel user)
         {
             return new Models.User
             {
@@ -25,9 +25,9 @@ namespace LearnQuickOnline.Helpers
             };
         }
 
-        public static UserModel ConvertUserToViewModel(Models.User user)
+        public static ViewUserModel ConvertUserToViewModel(Models.User user)
         {
-            return new UserModel
+            return new ViewUserModel
             {
                 Id = user.Id,
                 Username = user.Username,

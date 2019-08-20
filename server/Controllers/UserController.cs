@@ -25,9 +25,9 @@ namespace LearnQuickOnline.Controllers
                 if (_user != null)
                 {
                     return new Response<ViewUserModel> {
-                        Data=ModelConverter.ConvertUserToViewModel(_user),
-                        Message ="Found the user",
-                        Status=true
+                        Data = ModelConverter.ConvertUserToViewModel(_user),
+                        Message = "Found the user",
+                        Status = true
                     };
                 }
                 else
@@ -84,19 +84,19 @@ namespace LearnQuickOnline.Controllers
         {
             try
             {
-                var _user = context.Users.FindAsync(u => u.Username == user.Username && u.Password == user.Password);
+                var _user = context.Users.Find(u => u.Username == user.Username && u.Password == user.Password).ToList();
                 return new Response<ViewUserModel>
                 {
-                    //Data = ViewUserModel,
-                    Message = "User logged in",
+                    Data = ModelConverter.ConvertUserToViewModel(_user.FirstOrDefault()), 
+                    Message = "success",
                     Status = true
                 };
             }
             catch (Exception ex) {
                 return new Response<ViewUserModel>
                 {
-                    //Data = _user,
-                    Message = ex.Message,
+                   Data = null,
+                    Message = ex.Message + "specified user is unvailable",
                     Status = false
                 };
 
@@ -105,22 +105,49 @@ namespace LearnQuickOnline.Controllers
         }
 
         // POST api/values
-        [HttpPost("{/login/user}:Id")]
-        public async Task RegisterUser()
+        [HttpPost("register/user:Id")]
+        public Response<Models.User>  RegisterUser(Models.User user)
         {
+            try
+            {
+                var _user = context.Users.Find(u =>u.Username == user.Username);
+                if (_user != null)
+                {
+                    return new Response<Models.User>
+                    {
+                        Data = user, 
+                        Message = "user already exists",
+                        Status = false
+                    };
+                }
+                else if (_user == null) {
+                    context.Users.InsertOne(new Models.User
+                    {
+                        Username = user.Username,
+                        Password = user.Password,
+                        Name = user.Name,
+                        Surname = user.Surname,
+                        Email = user.Email,
+                        CellNumber = user.CellNumber
+                    });
+                    return new Response<Models.User>
+                    {
+                        Data =null ,
+                        Message = "OK" + "successfully added new user",
+                        Status= true
+    };                   
+                }
+            }
+            catch (Exception ex) {
+                return new Response<Models.User>
+                {
+                    Data = null,
+                    Message =ex.Message  +  "unable to add user",
+                    Status = false
+                };
+            }
 
-        }
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-      
+            return null;
+        } 
     }
 }

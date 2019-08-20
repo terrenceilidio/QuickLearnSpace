@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LearnQuickOnline.Services
 {
-    public class UserModel
+    public class ViewUserModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

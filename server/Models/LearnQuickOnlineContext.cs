@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using LearnQuickOnline;
 using LearnQuickOnline.Configure;
-using MongoDB.Driver;
 
 namespace LearnQuickOnline.Models {
     public class LearnQuickOnlineContext {
