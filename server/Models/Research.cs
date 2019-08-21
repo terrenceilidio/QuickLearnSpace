@@ -10,8 +10,7 @@ namespace LearnQuickOnline.Models {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-
-        [BsonElement("Name")]
+        
         public List<MongoDBRef> Author { get; set; }
         public List<MongoDBRef> RelatedResearch { get; set; }
         public List<MongoDBRef> RelatedAssessment { get; set; }

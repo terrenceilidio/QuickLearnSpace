@@ -105,7 +105,7 @@ namespace LearnQuickOnline.Controllers
         }
 
         // POST api/values
-        [HttpPost("register/user:Id")]
+        [HttpPost("register/user")]
         public Response<Models.User>  RegisterUser(Models.User user)
         {
             try

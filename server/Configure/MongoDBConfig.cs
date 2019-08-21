@@ -3,7 +3,7 @@ namespace LearnQuickOnline.Configure
 {
     public class MongoDBConfig
     {
-        public string Database { get; set; } = "LearnQuickOnlineDB";
+        public string Database { get; set; } = "QuickLearnSpace";
         public string Host { get; set; }
         public int Port { get; set; }
         public string User { get; set; }

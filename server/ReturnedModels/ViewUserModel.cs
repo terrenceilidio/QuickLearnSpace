@@ -13,7 +13,6 @@ namespace LearnQuickOnline.Services
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("Name")]
         public string Username { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
