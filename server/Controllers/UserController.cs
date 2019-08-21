@@ -15,7 +15,7 @@ namespace LearnQuickOnline.Controllers
     {
         Models.LearnQuickOnlineContext context = new Models.LearnQuickOnlineContext();
 
-        // GET api/values
+        // GET api/user/id
         [HttpGet("{id}")]
         public Response<ViewUserModel> GetUser(string id)
         {
@@ -46,19 +46,19 @@ namespace LearnQuickOnline.Controllers
             }
         }
 
-        // GET api/values/5
+        // GET api/user/all/users
         [HttpGet("all/users")]
         public async Task<Response<List<ViewUserModel>>> GetAllUsersAsync()
         {
             try
             {
                 var _allUsers = await context.Users.Find(u => true).ToListAsync();
-                if (_allUsers != null)
+                if (_allUsers.Any())
                 {
                     return new Response<List<ViewUserModel>>
                     {
                         Data = _allUsers.Select(v => ModelConverter.ConvertUserToViewModel(v)).ToList(),
-                        Message = "Found the user",
+                        Message = "success " + "returned all users",
                         Status = true
                     };
                 }
@@ -78,7 +78,7 @@ namespace LearnQuickOnline.Controllers
             }
         }
 
-        // POST api/values
+        // POST api/user/login/user
         [HttpPost("login/user")]
         public Response<ViewUserModel> LoginUser(Models.User user)
         {
@@ -104,23 +104,24 @@ namespace LearnQuickOnline.Controllers
 
         }
 
-        // POST api/values
+        // POST api/user/register/users
         [HttpPost("register/user")]
         public Response<Models.User>  RegisterUser(Models.User user)
         {
             try
             {
                 var _user = context.Users.Find(u =>u.Username == user.Username);
-                if (_user != null)
+                if (_user.Any())
                 {
                     return new Response<Models.User>
                     {
-                        Data = user, 
+                        Data = user,
                         Message = "user already exists",
                         Status = false
                     };
                 }
-                else if (_user == null) {
+                else if (_user.Any() == false)
+                {
                     context.Users.InsertOne(new Models.User
                     {
                         Username = user.Username,
@@ -128,14 +129,18 @@ namespace LearnQuickOnline.Controllers
                         Name = user.Name,
                         Surname = user.Surname,
                         Email = user.Email,
-                        CellNumber = user.CellNumber
+                        CellNumber = user.CellNumber,
+                        SocialNetworks = user.SocialNetworks,
+                        NumberOfFollowers = user.NumberOfFollowers,
+                        TopicsOfInterest = user.TopicsOfInterest
+
                     });
                     return new Response<Models.User>
                     {
-                        Data =null ,
+                        Data = null,
                         Message = "OK" + "successfully added new user",
-                        Status= true
-    };                   
+                        Status = true
+                    };
                 }
             }
             catch (Exception ex) {
